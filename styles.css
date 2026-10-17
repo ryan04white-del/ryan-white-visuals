@@ -51,7 +51,7 @@ a { color: inherit; }
   display: grid;
   align-items: end;
   overflow: hidden;
-  background: url("../assets/starfield.jpg") center/cover no-repeat;
+  background: url("starfield.jpg") center/cover no-repeat;
 }
 
 .hero::before {

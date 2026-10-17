@@ -45,7 +45,7 @@ a { color: inherit; }
   padding: clamp(3rem, 8vw, 7rem);
   background:
     linear-gradient(180deg, rgba(0,0,0,.05), rgba(0,0,0,.92)),
-    url("../assets/tunnel-silhouette.jpg") center 52%/cover no-repeat;
+    url("tunnel-silhouette.jpg") center 52%/cover no-repeat;
 }
 
 .scratch-hero h1 {
