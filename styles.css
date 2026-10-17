@@ -1,0 +1,226 @@
+:root {
+  --black: #050505;
+  --charcoal: #121212;
+  --graphite: #222;
+  --white: #f7f7f5;
+  --gray: #a5a5a2;
+  --line: rgba(255, 255, 255, .18);
+}
+
+* { box-sizing: border-box; }
+html { scroll-behavior: smooth; }
+
+body {
+  margin: 0;
+  color: var(--white);
+  background: var(--black);
+  font-family: "Inter", Arial, sans-serif;
+}
+
+a { color: inherit; }
+
+.site-nav {
+  position: fixed;
+  inset: 0 0 auto;
+  z-index: 30;
+  border-bottom: 1px solid var(--line);
+  background: rgba(5, 5, 5, .82);
+  backdrop-filter: blur(16px);
+}
+
+.navbar-brand {
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-size: 1.35rem;
+  letter-spacing: .08em;
+}
+
+.nav-link {
+  color: rgba(255,255,255,.7) !important;
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.nav-link:hover,
+.nav-link.active { color: white !important; }
+
+.hero {
+  position: relative;
+  min-height: 100svh;
+  display: grid;
+  align-items: end;
+  overflow: hidden;
+  background: url("../assets/starfield.jpg") center/cover no-repeat;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,.1) 15%, rgba(0,0,0,.12) 48%, #050505 100%);
+}
+
+.hero-copy {
+  position: relative;
+  z-index: 1;
+  padding-top: 9rem;
+  padding-bottom: clamp(3rem, 7vw, 6rem);
+}
+
+.hero h1,
+.display-editorial,
+.resume-title {
+  font-family: "Bodoni Moda", Georgia, serif;
+  font-weight: 500;
+}
+
+.hero h1 {
+  max-width: 1080px;
+  margin: 0;
+  font-size: clamp(4.2rem, 12vw, 10.5rem);
+  line-height: .77;
+  letter-spacing: -.055em;
+}
+
+.hero-intro {
+  max-width: 620px;
+  margin: 2rem 0 0 auto;
+  color: rgba(255,255,255,.78);
+  font-size: clamp(1.05rem, 2vw, 1.35rem);
+}
+
+.eyebrow {
+  margin-bottom: 1rem;
+  color: var(--gray);
+  font-size: .72rem;
+  font-weight: 800;
+  letter-spacing: .22em;
+  text-transform: uppercase;
+}
+
+.section-pad { padding: clamp(5rem, 10vw, 9rem) 0; }
+.section-line { border-top: 1px solid var(--line); }
+.text-soft { color: var(--gray); }
+
+.display-editorial {
+  font-size: clamp(3rem, 7vw, 6.7rem);
+  line-height: .92;
+  letter-spacing: -.04em;
+}
+
+.btn-white,
+.btn-outline-white {
+  padding: .85rem 1.25rem;
+  border-radius: 0;
+  font-size: .78rem;
+  font-weight: 800;
+  letter-spacing: .11em;
+  text-transform: uppercase;
+}
+
+.btn-white { color: black; background: white; border-color: white; }
+.btn-white:hover { color: white; background: transparent; }
+.btn-outline-white { color: white; border: 1px solid rgba(255,255,255,.5); }
+.btn-outline-white:hover { color: black; background: white; border-color: white; }
+
+.portfolio-grid {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  gap: clamp(.8rem, 1.5vw, 1.4rem);
+}
+
+.portfolio-item {
+  position: relative;
+  min-height: 340px;
+  overflow: hidden;
+  background: var(--charcoal);
+}
+
+.portfolio-item img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: transform .6s cubic-bezier(.2,.7,.2,1), filter .5s ease;
+}
+
+.portfolio-item:hover img { transform: scale(1.025); filter: grayscale(.15); }
+
+.portfolio-item figcaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 3rem 1.25rem 1.15rem;
+  background: linear-gradient(transparent, rgba(0,0,0,.82));
+  font-size: .8rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.portfolio-item.wide { grid-column: span 7; aspect-ratio: 16 / 10; }
+.portfolio-item.narrow { grid-column: span 5; aspect-ratio: 4 / 5; }
+.portfolio-item.half { grid-column: span 6; aspect-ratio: 4 / 3; }
+.portfolio-item img.top { object-position: center 25%; }
+.portfolio-item img.low { object-position: center 70%; }
+
+.film-shell {
+  padding: clamp(1rem, 2vw, 1.5rem);
+  border: 1px solid var(--line);
+  background: #0c0c0c;
+}
+
+.film-shell video {
+  width: 100%;
+  display: block;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  background: black;
+}
+
+.manifesto-number {
+  font-family: "Bodoni Moda", Georgia, serif;
+  color: #4b4b4b;
+  font-size: 3.5rem;
+  line-height: 1;
+}
+
+.manifesto-item { padding-top: 1.5rem; border-top: 1px solid var(--line); }
+
+.contact-strip {
+  padding: 4rem 0;
+  color: black;
+  background: white;
+}
+
+.contact-strip .eyebrow { color: #555; }
+
+.resume-shell {
+  max-width: 1080px;
+  margin: 9rem auto 5rem;
+  padding: clamp(1.5rem, 5vw, 4.5rem);
+  border: 1px solid var(--line);
+  background: #0d0d0d;
+}
+
+.resume-title {
+  margin: 0;
+  font-size: clamp(4rem, 10vw, 8rem);
+  line-height: .8;
+  letter-spacing: -.05em;
+}
+
+.resume-section { padding-top: 2rem; border-top: 1px solid var(--line); }
+.resume-item + .resume-item { margin-top: 2rem; }
+.skill-pill { display: inline-block; margin: .25rem; padding: .5rem .75rem; border: 1px solid #555; }
+
+footer { color: #8a8a8a; background: #050505; border-top: 1px solid var(--line); }
+
+@media (max-width: 767px) {
+  .hero h1 { font-size: clamp(4rem, 23vw, 7rem); }
+  .hero-intro { margin-left: 0; }
+  .portfolio-item.wide,
+  .portfolio-item.narrow,
+  .portfolio-item.half { grid-column: 1 / -1; aspect-ratio: auto; min-height: 460px; }
+}
+

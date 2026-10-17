@@ -3,77 +3,120 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Ryan White's photography and videography portfolio.">
-  <title>Ryan White | Visual Storyteller</title>
+  <meta name="description" content="Ryan White's black-and-white photography and videography portfolio.">
+  <title>Ryan White | Photography & Film</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@600;700&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,500;6..96,600&family=Inter:wght@400;600;800&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-      <a class="navbar-brand" href="index.html">Ryan White Visuals</a>
+  <nav class="navbar navbar-expand-lg navbar-dark site-nav">
+    <div class="container-fluid px-lg-5">
+      <a class="navbar-brand" href="index.html">RYAN WHITE</a>
       <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#mainNav" aria-controls="mainNav" aria-expanded="false" aria-label="Toggle navigation"><span class="navbar-toggler-icon"></span></button>
       <div class="collapse navbar-collapse" id="mainNav">
-        <ul class="navbar-nav ms-auto gap-lg-3">
-          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
-          <li class="nav-item"><a class="nav-link" href="resume.html">Creative résumé</a></li>
-          <li class="nav-item"><a class="nav-link" href="scratch.html">Behind the lens</a></li>
-          <li class="nav-item"><a class="nav-link" href="app.html">Exposure lab</a></li>
+        <ul class="navbar-nav ms-auto gap-lg-4">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Portfolio</a></li>
+          <li class="nav-item"><a class="nav-link" href="resume.html">Résumé</a></li>
+          <li class="nav-item"><a class="nav-link" href="scratch.html">Process</a></li>
+          <li class="nav-item"><a class="nav-link" href="app.html">Exposure Lab</a></li>
         </ul>
       </div>
     </div>
   </nav>
 
   <header class="hero">
-    <div class="container pb-5 mb-4">
-      <p class="eyebrow mb-3">Photography · Film · Story</p>
-      <h1>Light makes the ordinary unforgettable.</h1>
-      <p class="lead mt-4 col-lg-7">I’m Ryan White, a Utah-based student and visual storyteller drawn to honest landscapes, lively people, and the small details that make a moment feel real.</p>
-      <div class="d-flex flex-wrap gap-3 mt-4">
-        <a class="btn btn-rust btn-lg" href="scratch.html#gallery">View the gallery</a>
-        <a class="btn btn-outline-light btn-lg" href="resume.html">Creative résumé</a>
+    <div class="container-fluid px-lg-5 hero-copy">
+      <p class="eyebrow">Photography · Videography · Utah</p>
+      <h1>Light.<br>Motion.<br>Memory.</h1>
+      <p class="hero-intro">I’m Ryan White, a visual storyteller interested in landscapes, people, and the split second when an ordinary scene becomes worth remembering.</p>
+      <div class="d-flex flex-wrap justify-content-end gap-3 mt-4">
+        <a class="btn btn-white" href="#work">View the work</a>
+        <a class="btn btn-outline-white" href="app.html">Try Exposure Lab</a>
       </div>
     </div>
   </header>
 
   <main>
-    <section class="section-pad">
-      <div class="container">
-        <div class="row g-5 align-items-end mb-5">
-          <div class="col-lg-7"><p class="eyebrow">Creative approach</p><h2 class="display-3 display-serif">Images that feel lived in.</h2></div>
-          <div class="col-lg-5"><p class="lead">My best work starts with curiosity: notice the light, listen for the real story, then simplify the frame until the moment can breathe.</p></div>
+    <section class="section-pad" id="work">
+      <div class="container-fluid px-lg-5">
+        <div class="row g-4 align-items-end mb-5">
+          <div class="col-lg-8"><p class="eyebrow">Selected photography</p><h2 class="display-editorial mb-0">Ten frames.<br>One point of view.</h2></div>
+          <div class="col-lg-4"><p class="text-soft mb-0">A collection built around scale, contrast, movement, and honest human energy. Every image below is original work.</p></div>
+        </div>
+
+        <div class="portfolio-grid">
+          <figure class="portfolio-item wide"><img src="assets/canyon-river.jpg" alt="River winding between tall canyon walls"><figcaption>Rio Grande · Scale and stillness</figcaption></figure>
+          <figure class="portfolio-item narrow"><img src="assets/teton-portrait.jpg" alt="Woman standing before the Grand Tetons"><figcaption>Grand Teton · Wind and presence</figcaption></figure>
+
+          <figure class="portfolio-item narrow"><img src="assets/tunnel-silhouette.jpg" alt="Silhouette standing in a concrete tunnel"><figcaption>Threshold · Framing with contrast</figcaption></figure>
+          <figure class="portfolio-item wide"><img src="assets/starfield.jpg" alt="Silhouette beneath a dense night sky"><figcaption>Night Signal · Working with darkness</figcaption></figure>
+
+          <figure class="portfolio-item half"><img src="assets/rock-abstract.jpg" alt="Abstract opening formed by canyon rock"><figcaption>Negative Space · Geometry in nature</figcaption></figure>
+          <figure class="portfolio-item half"><img src="assets/canyon-hike.jpg" alt="Hiker climbing through a narrow canyon"><figcaption>Upward · Movement through scale</figcaption></figure>
+
+          <figure class="portfolio-item wide"><img src="assets/photographer.jpg" alt="Photographer looking through a camera"><figcaption>Behind the Camera · The observer observed</figcaption></figure>
+          <figure class="portfolio-item narrow"><img src="assets/desert-portrait.jpg" alt="Laughing portrait in a desert setting"><figcaption>Unscripted · Personality between poses</figcaption></figure>
+
+          <figure class="portfolio-item narrow"><img class="top" src="assets/winter-road.jpg" alt="Snow-covered mountain road and parked vehicles"><figcaption>Arrival · Winter in the canyon</figcaption></figure>
+          <figure class="portfolio-item wide"><img class="low" src="assets/mountain-portrait.jpg" alt="Hiker standing above a mountain valley"><figcaption>High Country · A person within the landscape</figcaption></figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-line" id="film">
+      <div class="container-fluid px-lg-5">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-4">
+            <p class="eyebrow">Original film</p>
+            <h2 class="display-editorial">A minute in motion.</h2>
+            <p class="text-soft">This advertising piece combines product detail, outdoor footage, pacing, audio, and a simple visual payoff. It shows how still-image instincts can carry into a moving story.</p>
+          </div>
+          <div class="col-lg-8">
+            <div class="film-shell">
+              <video controls preload="metadata" poster="assets/canyon-river.jpg">
+                <source src="assets/adventure-film.mp4" type="video/mp4">
+                Your browser does not support embedded video.
+              </video>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section-pad section-line">
+      <div class="container-fluid px-lg-5">
+        <div class="row g-5 mb-5">
+          <div class="col-lg-7"><p class="eyebrow">Working philosophy</p><h2 class="display-editorial">The camera is only the beginning.</h2></div>
+          <div class="col-lg-5"><p class="text-soft fs-5">The strongest image is rarely the most complicated one. I try to notice first, simplify second, and only then press the shutter.</p></div>
         </div>
         <div class="row g-4">
-          <div class="col-md-4"><article class="project-card"><img src="assets/canyon-river.jpg" class="card-img-top" alt="Black-and-white river winding between tall canyon walls"><div class="card-body p-4"><h3 class="h4">Landscape</h3><p>Natural light, expansive scenery, and a grounded sense of place.</p></div></article></div>
-          <div class="col-md-4"><article class="project-card"><img src="assets/teton-portrait.jpg" class="card-img-top" alt="Black-and-white portrait in front of the Grand Tetons"><div class="card-body p-4"><h3 class="h4">People & moments</h3><p>Candid frames that preserve energy, personality, and connection.</p></div></article></div>
-          <div class="col-md-4"><article class="project-card"><img src="assets/photographer.jpg" class="card-img-top" alt="Photographer looking through a camera"><div class="card-body p-4"><h3 class="h4">Motion</h3><p>Short-form video shaped through composition, clean audio, and purposeful editing.</p></div></article></div>
+          <div class="col-md-4 manifesto-item"><div class="manifesto-number">01</div><h3 class="h4 mt-3">Notice</h3><p class="text-soft">Watch the direction of light, the balance of the frame, and the small gesture that reveals character.</p></div>
+          <div class="col-md-4 manifesto-item"><div class="manifesto-number">02</div><h3 class="h4 mt-3">Simplify</h3><p class="text-soft">Remove visual noise so the viewer knows where to look and what the moment is meant to feel like.</p></div>
+          <div class="col-md-4 manifesto-item"><div class="manifesto-number">03</div><h3 class="h4 mt-3">Preserve</h3><p class="text-soft">Edit with restraint, protect the atmosphere, and keep the final image honest to the experience.</p></div>
         </div>
       </div>
     </section>
 
-    <section class="section-pad dark-section">
-      <div class="container">
-        <div class="row g-5 align-items-center">
-          <div class="col-lg-5"><p class="eyebrow">Featured film</p><h2 class="display-4 display-serif">A story built one cut at a time.</h2><p class="lead">This one-minute advertising piece combines close detail, outdoor action, sound, pacing, and a simple visual payoff. It represents the kind of energetic, human-centered work I enjoy creating.</p></div>
-          <div class="col-lg-7"><div class="film-frame"><video controls preload="metadata" poster="assets/canyon-river.jpg"><source src="assets/adventure-film.mp4" type="video/mp4">Your browser does not support embedded video.</video></div></div>
-        </div>
-      </div>
-    </section>
-
-    <section class="section-pad">
-      <div class="container">
-        <div class="row g-5 align-items-center">
-          <div class="col-lg-6"><p class="eyebrow">Current kit</p><h2 class="display-4 display-serif">Small tools. Intentional choices.</h2><p class="lead">A Sony RX100 VII keeps the setup nimble, while DJI audio gear helps the story sound as clean as it looks.</p></div>
-          <div class="col-lg-6"><div class="row g-4"><div class="col-6 metric"><div class="fs-2 fw-bold">Sony</div><div>RX100 VII</div></div><div class="col-6 metric"><div class="fs-2 fw-bold">DJI</div><div>Wireless audio</div></div><div class="col-6 metric"><div class="fs-2 fw-bold">Photo</div><div>Light & composition</div></div><div class="col-6 metric"><div class="fs-2 fw-bold">Video</div><div>Story & pacing</div></div></div></div>
+    <section class="contact-strip">
+      <div class="container-fluid px-lg-5 d-lg-flex justify-content-between align-items-end gap-5">
+        <div><p class="eyebrow">Explore further</p><h2 class="display-editorial mb-0">Go behind the frame.</h2></div>
+        <div class="d-flex flex-wrap gap-3 mt-4 mt-lg-0">
+          <a class="btn btn-dark rounded-0" href="scratch.html">Creative process</a>
+          <a class="btn btn-outline-dark rounded-0" href="app.html">Exposure Lab</a>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="py-5"><div class="container d-flex flex-wrap justify-content-between gap-3"><span>© 2026 Ryan White Visuals</span><span>Photography and video by Ryan White</span></div></footer>
+  <footer class="py-4">
+    <div class="container-fluid px-lg-5 d-flex flex-wrap justify-content-between gap-2">
+      <span>© 2026 Ryan White</span><span>Photography & film portfolio</span>
+    </div>
+  </footer>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
+

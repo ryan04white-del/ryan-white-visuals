@@ -3,38 +3,168 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Exposure Lab | Ryan White Visuals</title>
+  <meta name="description" content="An interactive exposure-triangle simulator using an original Ryan White photograph.">
+  <title>Exposure Lab | Ryan White</title>
   <style>
-    :root{--ink:#10181b;--paper:#f3ede1;--rust:#ef7545;--blue:#84bacb;--panel:#17272c}*{box-sizing:border-box}body{margin:0;color:var(--paper);background:var(--ink);font-family:Inter,system-ui,sans-serif}.topbar{display:flex;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,5vw,4rem);border-bottom:1px solid #314349}.topbar a{color:var(--paper);text-decoration:none}.app{display:grid;grid-template-columns:minmax(310px,.8fr) 1.2fr;min-height:calc(100vh - 59px)}.controls{padding:clamp(1.4rem,4vw,4rem);background:var(--panel)}h1{font-family:Georgia,serif;font-size:clamp(2.7rem,6vw,5.8rem);line-height:.9;margin:.25rem 0 1rem}.kicker{color:var(--rust);font-weight:800;letter-spacing:.15em;text-transform:uppercase}.control{margin:2rem 0}.control label{display:flex;justify-content:space-between;font-weight:800}.control output{color:var(--blue)}input[type=range]{width:100%;accent-color:var(--rust)}select{width:100%;padding:.7rem;color:var(--paper);background:#20363c;border:1px solid #48626a;border-radius:.5rem}.stage{position:relative;display:grid;place-items:center;overflow:hidden;min-height:650px;background:#718c93}.scene{position:absolute;inset:-5%;background:linear-gradient(180deg,rgba(16,24,27,.05),rgba(16,24,27,.45)),url('assets/teton-portrait.jpg') center 58%/cover;transition:filter .2s ease,transform .2s ease}.focus{position:relative;z-index:1;width:min(78%,760px);padding:2rem;border:1px solid rgba(255,255,255,.35);border-radius:1rem;background:rgba(12,22,25,.72);backdrop-filter:blur(10px)}.readout{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.reading{padding:1rem;background:rgba(255,255,255,.08);border-radius:.75rem}.reading strong{display:block;color:var(--blue);font-size:1.25rem}.meter{height:.7rem;margin:1.5rem 0;background:#33464c;border-radius:99px;overflow:hidden}.meter span{display:block;width:50%;height:100%;background:linear-gradient(90deg,#5ba5bd,#ef7545);transition:width .2s}.tip{margin-bottom:0;color:#d8e1df}.preset-row{display:flex;flex-wrap:wrap;gap:.5rem}.preset{padding:.55rem .75rem;color:var(--paper);background:transparent;border:1px solid #60787f;border-radius:99px;cursor:pointer}.preset:hover{border-color:var(--rust)}@media(max-width:860px){.app{grid-template-columns:1fr}.stage{min-height:620px}.readout{grid-template-columns:repeat(2,1fr)}}
+    :root{--black:#050505;--panel:#111;--white:#f4f4f1;--gray:#a0a09d;--line:rgba(255,255,255,.18)}
+    *{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;color:var(--white);background:var(--black);font-family:Arial,sans-serif}
+    button,input{font:inherit}.topbar{display:flex;justify-content:space-between;gap:1rem;padding:1rem clamp(1rem,4vw,4rem);border-bottom:1px solid var(--line);background:#080808}.topbar a{color:var(--white);font-size:.78rem;font-weight:700;letter-spacing:.1em;text-decoration:none;text-transform:uppercase}
+    .lab{display:grid;grid-template-columns:minmax(330px,.72fr) 1.28fr;min-height:calc(100svh - 51px)}
+    .controls{padding:clamp(1.5rem,4vw,4rem);border-right:1px solid var(--line);background:var(--panel)}
+    .kicker{color:var(--gray);font-size:.7rem;font-weight:800;letter-spacing:.2em;text-transform:uppercase}
+    h1{max-width:500px;margin:.25rem 0 1rem;font-family:Georgia,serif;font-size:clamp(3rem,6vw,6rem);font-weight:400;line-height:.82;letter-spacing:-.05em}
+    .intro{max-width:570px;color:#bcbcb8;line-height:1.6}.control{margin:2.2rem 0}.control label{display:flex;justify-content:space-between;gap:1rem;margin-bottom:.75rem;font-weight:700}.control output{color:#bfbfbb;font-family:Georgia,serif;font-size:1.25rem}
+    input[type=range]{width:100%;height:2px;accent-color:white}.range-notes{display:flex;justify-content:space-between;margin-top:.55rem;color:#747471;font-size:.72rem}
+    .preset-row{display:flex;flex-wrap:wrap;gap:.55rem}.preset{padding:.65rem .85rem;color:white;background:transparent;border:1px solid #555;cursor:pointer;font-size:.74rem;letter-spacing:.08em;text-transform:uppercase}.preset:hover,.preset:focus{color:black;background:white}
+    .preview-panel{position:relative;display:grid;grid-template-rows:1fr auto;min-width:0;background:#0a0a0a}.image-stage{position:relative;min-height:650px;overflow:hidden;background:#222}
+    .photo-effects{position:absolute;inset:0;overflow:hidden;background:#111}.photo-layer{position:absolute;inset:-2%;width:104%;height:104%;object-fit:cover;object-position:center 58%;filter:grayscale(1);transform:scale(1.02);will-change:filter,transform}
+    .subject-layer{clip-path:ellipse(24% 37% at 50% 71%)}.motion-ghost{opacity:0;clip-path:ellipse(24% 37% at 50% 71%);mix-blend-mode:screen}
+    .grain{position:absolute;inset:0;pointer-events:none;opacity:0;mix-blend-mode:screen;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.52'/%3E%3C/svg%3E");background-size:180px 180px}
+    .image-stage::after{content:"";position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,rgba(0,0,0,.02),rgba(0,0,0,.22))}
+    .frame-label{position:absolute;z-index:3;inset:1.2rem 1.2rem auto;display:flex;justify-content:space-between;color:rgba(255,255,255,.75);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase}
+    .focus-brackets{position:absolute;z-index:3;left:50%;top:67%;width:180px;height:220px;transform:translate(-50%,-50%);border:1px solid rgba(255,255,255,.35)}.focus-brackets::before,.focus-brackets::after{content:"";position:absolute;background:white}.focus-brackets::before{width:18px;height:1px;left:50%;top:50%;transform:translateX(-50%)}.focus-brackets::after{width:1px;height:18px;left:50%;top:50%;transform:translateY(-50%)}
+    .readout-panel{position:relative;z-index:4;padding:1.4rem clamp(1rem,3vw,2.5rem);border-top:1px solid var(--line);background:#090909}
+    .readouts{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem}.reading{padding-right:1rem;border-right:1px solid var(--line);color:var(--gray);font-size:.7rem;letter-spacing:.1em;text-transform:uppercase}.reading:last-child{border:0}.reading strong{display:block;margin-bottom:.3rem;color:white;font-family:Georgia,serif;font-size:1.35rem;font-weight:400;letter-spacing:0;text-transform:none}
+    .meter-wrap{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:1rem;margin-top:1.25rem;color:#777;font-size:.7rem}.meter{position:relative;height:2px;background:linear-gradient(90deg,#444,#fff,#444)}.meter-needle{position:absolute;top:50%;left:50%;width:2px;height:18px;background:white;transform:translate(-50%,-50%);transition:left .2s ease}.tip{margin:1rem 0 0;color:#bcbcb8;font-size:.9rem}
+    .original-toggle{position:absolute;z-index:5;right:1rem;bottom:1rem;padding:.65rem .8rem;color:white;background:rgba(0,0,0,.7);border:1px solid rgba(255,255,255,.45);cursor:pointer;font-size:.7rem;letter-spacing:.08em;text-transform:uppercase}.original-toggle:hover{color:black;background:white}
+    @media(max-width:900px){.lab{grid-template-columns:1fr}.controls{border-right:0;border-bottom:1px solid var(--line)}.image-stage{min-height:620px}.readouts{grid-template-columns:repeat(2,1fr)}.reading:nth-child(2){border-right:0}}
+    @media(max-width:520px){.image-stage{min-height:520px}.focus-brackets{width:130px;height:170px}.readouts{gap:.8rem}.reading strong{font-size:1.1rem}}
   </style>
 </head>
 <body>
-  <nav class="topbar"><a href="scratch.html">← Behind the lens</a><a href="index.html">Professional site</a></nav>
-  <main class="app">
-    <section class="controls"><p class="kicker">Interactive web app</p><h1>Exposure Lab</h1><p>Move the three controls and watch the visual character of the frame change. The simulator exaggerates each effect so the tradeoffs are easy to see.</p>
-      <div class="control"><label for="aperture">Aperture <output id="apertureOut">f/2.8</output></label><input id="aperture" type="range" min="0" max="6" value="2" step="1"></div>
-      <div class="control"><label for="shutter">Shutter speed <output id="shutterOut">1/125s</output></label><input id="shutter" type="range" min="0" max="7" value="4" step="1"></div>
-      <div class="control"><label for="iso">ISO <output id="isoOut">400</output></label><input id="iso" type="range" min="0" max="6" value="2" step="1"></div>
-      <div class="control"><label>Try a starting point</label><div class="preset-row"><button class="preset" data-preset="portrait">Portrait</button><button class="preset" data-preset="action">Action</button><button class="preset" data-preset="landscape">Landscape</button><button class="preset" data-preset="night">Night</button></div></div>
+  <nav class="topbar"><a href="scratch.html">← Behind the frame</a><a href="index.html">Portfolio</a></nav>
+  <main class="lab">
+    <section class="controls">
+      <p class="kicker">Interactive web app</p>
+      <h1>Exposure<br>Lab.</h1>
+      <p class="intro">Adjust aperture, shutter speed, and ISO to see how the settings change an original photograph. The simulation exaggerates the effects slightly so each tradeoff is easy to recognize.</p>
+
+      <div class="control">
+        <label for="aperture">Aperture <output id="apertureOut">f/4</output></label>
+        <input id="aperture" type="range" min="0" max="7" value="3" step="1">
+        <div class="range-notes"><span>Wide · more blur</span><span>Narrow · more depth</span></div>
+      </div>
+      <div class="control">
+        <label for="shutter">Shutter speed <output id="shutterOut">1/125s</output></label>
+        <input id="shutter" type="range" min="0" max="7" value="3" step="1">
+        <div class="range-notes"><span>Slow · more motion</span><span>Fast · freezes motion</span></div>
+      </div>
+      <div class="control">
+        <label for="iso">ISO <output id="isoOut">400</output></label>
+        <input id="iso" type="range" min="0" max="6" value="2" step="1">
+        <div class="range-notes"><span>Clean</span><span>Bright · more grain</span></div>
+      </div>
+      <div class="control">
+        <label>Starting points</label>
+        <div class="preset-row"><button class="preset" data-preset="portrait">Portrait</button><button class="preset" data-preset="action">Action</button><button class="preset" data-preset="landscape">Landscape</button><button class="preset" data-preset="night">Night</button></div>
+      </div>
     </section>
-    <section class="stage" aria-live="polite"><div class="scene" id="scene"></div><div class="focus"><p class="kicker">Live preview</p><div class="readout"><div class="reading"><strong id="brightnessText">Balanced</strong>Exposure</div><div class="reading"><strong id="depthText">Soft</strong>Background</div><div class="reading"><strong id="motionText">Natural</strong>Motion</div><div class="reading"><strong id="noiseText">Low</strong>Noise</div></div><div class="meter"><span id="meterFill"></span></div><p class="tip" id="tip">A balanced starting point for everyday scenes.</p></div></section>
+
+    <section class="preview-panel" aria-live="polite">
+      <div class="image-stage">
+        <div class="photo-effects" id="photoEffects">
+          <img class="photo-layer" id="backgroundPhoto" src="assets/teton-portrait.jpg" alt="Original Grand Teton portrait used for the exposure simulation">
+          <img class="photo-layer subject-layer" id="subjectPhoto" src="assets/teton-portrait.jpg" alt="">
+          <img class="photo-layer motion-ghost" id="motionGhost" src="assets/teton-portrait.jpg" alt="">
+          <div class="grain" id="grain"></div>
+        </div>
+        <div class="frame-label"><span>Ryan White · Original photograph</span><span id="evLabel">EV ±0.0</span></div>
+        <div class="focus-brackets" aria-hidden="true"></div>
+        <button class="original-toggle" id="originalToggle" type="button">Hold for original</button>
+      </div>
+      <div class="readout-panel">
+        <div class="readouts">
+          <div class="reading"><strong id="exposureText">Balanced</strong>Exposure</div>
+          <div class="reading"><strong id="depthText">Moderate</strong>Depth of field</div>
+          <div class="reading"><strong id="motionText">Natural</strong>Motion</div>
+          <div class="reading"><strong id="noiseText">Low</strong>Image noise</div>
+        </div>
+        <div class="meter-wrap"><span>−3</span><div class="meter"><span class="meter-needle" id="meterNeedle"></span></div><span>+3</span></div>
+        <p class="tip" id="tip">A balanced starting point with moderate depth of field and low noise.</p>
+      </div>
+    </section>
   </main>
+
   <script>
-    const apertures=[1.4,2,2.8,4,5.6,8,11], shutters=['1/15','1/30','1/60','1/125','1/250','1/500','1/1000','1/2000'], isos=[100,200,400,800,1600,3200,6400];
-    const a=document.querySelector('#aperture'),s=document.querySelector('#shutter'),i=document.querySelector('#iso');
-    const out=(id,v)=>document.querySelector(id).textContent=v;
-    function update(){
-      const av=+a.value,sv=+s.value,iv=+i.value;
-      out('#apertureOut',`f/${apertures[av]}`);out('#shutterOut',`${shutters[sv]}s`);out('#isoOut',isos[iv]);
-      const exposure=(6-av)+(iv*.72)-(sv*.62);const pct=Math.max(8,Math.min(92,50+exposure*6));
-      const brightness=exposure<-1.5?'Under':exposure>1.5?'Over':'Balanced';
-      out('#brightnessText',brightness);out('#depthText',av<3?'Soft':av>4?'Deep':'Moderate');out('#motionText',sv<3?'Blurred':sv>5?'Frozen':'Natural');out('#noiseText',iv<3?'Low':iv>4?'Strong':'Moderate');
-      document.querySelector('#meterFill').style.width=`${pct}%`;
-      const scene=document.querySelector('#scene');scene.style.filter=`brightness(${Math.max(.38,Math.min(1.65,1+exposure*.12))}) blur(${Math.max(0,(2-av)*1.7)}px) contrast(${1+iv*.025})`;scene.style.transform=`scale(${1.06+Math.max(0,(2-av)*.006)})`;
-      const tips=[];if(sv<3)tips.push('Use support or embrace intentional motion blur.');if(iv>4)tips.push('Expect visible grain in the shadows.');if(av<3)tips.push('Focus carefully—the depth of field is thin.');if(!tips.length)tips.push('A flexible combination for a wide range of scenes.');out('#tip',tips.join(' '));
+    const apertures=[1.4,2,2.8,4,5.6,8,11,16];
+    const shutters=['1/15','1/30','1/60','1/125','1/250','1/500','1/1000','1/2000'];
+    const isos=[100,200,400,800,1600,3200,6400];
+    const aperture=document.querySelector('#aperture');
+    const shutter=document.querySelector('#shutter');
+    const iso=document.querySelector('#iso');
+    const backgroundPhoto=document.querySelector('#backgroundPhoto');
+    const subjectPhoto=document.querySelector('#subjectPhoto');
+    const motionGhost=document.querySelector('#motionGhost');
+    const grain=document.querySelector('#grain');
+    const originalToggle=document.querySelector('#originalToggle');
+    let showingOriginal=false;
+
+    const setText=(selector,value)=>document.querySelector(selector).textContent=value;
+    const clamp=(value,min,max)=>Math.max(min,Math.min(max,value));
+
+    function render(){
+      const ai=Number(aperture.value),si=Number(shutter.value),ii=Number(iso.value);
+      setText('#apertureOut',`f/${apertures[ai]}`);
+      setText('#shutterOut',`${shutters[si]}s`);
+      setText('#isoOut',isos[ii]);
+
+      const ev=(3-ai)+(3-si)+(ii-2);
+      const visualBrightness=clamp(Math.pow(2,ev*.27),.34,2.15);
+      const depthBlur=Math.max(0,(4-ai)*2);
+      const motionBlur=Math.max(0,(3-si)*1.25);
+      const grainAmount=Math.max(0,(ii-1)*.09);
+      const shared=`grayscale(1) brightness(${visualBrightness}) contrast(${1+ii*.025}) blur(${motionBlur}px)`;
+
+      if(!showingOriginal){
+        backgroundPhoto.style.filter=`${shared} blur(${depthBlur+motionBlur}px)`;
+        subjectPhoto.style.filter=shared;
+        motionGhost.style.filter=`grayscale(1) brightness(${visualBrightness}) blur(${motionBlur+1}px)`;
+        motionGhost.style.opacity=String(clamp((3-si)*.1,0,.3));
+        motionGhost.style.transform=`translateX(${Math.max(0,(3-si)*7)}px) scale(1.02)`;
+        grain.style.opacity=String(grainAmount);
+      }
+
+      const exposure=ev<=-2?'Very dark':ev<-.5?'Underexposed':ev>.5&&ev<2?'Overexposed':ev>=2?'Very bright':'Balanced';
+      const depth=ai<=1?'Very shallow':ai<=3?'Moderate':ai<=5?'Deep':'Very deep';
+      const motion=si<=1?'Blurred':si<=3?'Natural':si<=5?'Crisp':'Frozen';
+      const noise=ii<=2?'Low':ii<=4?'Visible':'Heavy';
+      setText('#exposureText',exposure);
+      setText('#depthText',depth);
+      setText('#motionText',motion);
+      setText('#noiseText',noise);
+      setText('#evLabel',`EV ${ev>0?'+':''}${ev.toFixed(1)}`);
+      document.querySelector('#meterNeedle').style.left=`${clamp(50+ev*8,3,97)}%`;
+
+      const tips=[];
+      if(ai<=1)tips.push('The wide aperture isolates the subject but makes precise focus more important.');
+      if(ai>=5)tips.push('The narrow aperture keeps more of the mountains and foreground sharp.');
+      if(si<=1)tips.push('The slow shutter introduces visible motion blur.');
+      if(si>=6)tips.push('The fast shutter freezes movement but removes light.');
+      if(ii>=5)tips.push('High ISO restores brightness at the cost of strong grain.');
+      if(!tips.length)tips.push('This combination balances exposure, depth, motion, and image quality.');
+      setText('#tip',tips.join(' '));
     }
-    [a,s,i].forEach(el=>el.addEventListener('input',update));
-    const presets={portrait:[1,4,1],action:[2,6,3],landscape:[5,4,1],night:[1,1,5]};document.querySelectorAll('.preset').forEach(b=>b.addEventListener('click',()=>{[a.value,s.value,i.value]=presets[b.dataset.preset];update()}));update();
+
+    function showOriginal(on){
+      showingOriginal=on;
+      if(on){
+        [backgroundPhoto,subjectPhoto,motionGhost].forEach(photo=>{photo.style.filter='grayscale(1)';photo.style.transform='scale(1.02)'});
+        motionGhost.style.opacity='0';grain.style.opacity='0';originalToggle.textContent='Original image';
+      }else{originalToggle.textContent='Hold for original';render()}
+    }
+
+    [aperture,shutter,iso].forEach(control=>control.addEventListener('input',render));
+    const presets={portrait:[1,4,1],action:[2,6,3],landscape:[6,3,1],night:[1,1,5]};
+    document.querySelectorAll('.preset').forEach(button=>button.addEventListener('click',()=>{
+      [aperture.value,shutter.value,iso.value]=presets[button.dataset.preset];render();
+    }));
+    originalToggle.addEventListener('pointerdown',()=>showOriginal(true));
+    originalToggle.addEventListener('pointerup',()=>showOriginal(false));
+    originalToggle.addEventListener('pointerleave',()=>showOriginal(false));
+    originalToggle.addEventListener('keydown',event=>{if(event.code==='Space'||event.code==='Enter')showOriginal(true)});
+    originalToggle.addEventListener('keyup',()=>showOriginal(false));
+    render();
   </script>
 </body>
 </html>
+
