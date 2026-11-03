@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Ryan White's HTML and CSS walkthrough website.">
+  <title>Ryan White | WebDev Walkthrough</title>
+  <link rel="stylesheet" href="css/styles.css">
+  <!-- An internal rule supplements the shared external stylesheet. -->
+  <style>.welcome-line { font-style: italic; }</style>
+</head>
+<body id="top">
+  <header class="site-header">
+    <a class="brand" href="index.html" title="Ryan White walkthrough home">RYAN WHITE</a>
+    <nav aria-label="Main navigation"><ul><li><a href="index.html" aria-current="page">Home</a></li><li><a href="pages/resume.html">Résumé</a></li><li><a href="pages/interests.html">Interests</a></li></ul></nav>
+  </header>
+  <main>
+    <section class="intro">
+      <span class="page-tag">HTML and CSS walkthrough</span>
+      <div class="eyebrow">Student · Photographer · Lifelong learner</div>
+      <h1>Hi, I'm Ryan White.</h1>
+      <p class="lead welcome-line">I enjoy turning ideas into something useful, whether that is a clear explanation, a photograph, or a website.</p>
+    </section>
+    <div class="columns">
+      <section class="story" id="about">
+        <img class="story-photo" src="../canyon-river.jpg" alt="River winding through tall canyon walls" width="900" height="1200">
+        <h2>A little about me</h2>
+        <p>I am a student at Brigham Young University with interests in accounting, information systems, and visual storytelling.</p>
+        <p>I also teach at the Provo Missionary Training Center. I enjoy helping people understand new ideas and feel comfortable learning.</p>
+        <p>Outside of school and work, I like photography, basketball, camping, and exploring the outdoors.</p>
+        <p><a href="pages/resume.html" title="Read about my education and experience">Read my résumé</a> or <a href="#explore">explore this website</a>.</p>
+      </section>
+      <section class="panel" id="explore">
+        <h2>Explore the pages</h2>
+        <ol>
+          <li><a href="pages/resume.html">My résumé</a>
+            <ul><li>Education and experience</li><li>Skills I am developing</li></ul>
+          </li>
+          <li><a href="pages/interests.html">My interests</a>
+            <ul><li>Photography and the outdoors</li><li>A simple creative process</li></ul>
+          </li>
+        </ol>
+        <p class="note">See more of my work at <a href="../index.html" target="_blank" rel="noopener" title="Open my photography portfolio in a new tab">Ryan White Visuals</a>.<br>Learn more about my university at <a href="https://www.byu.edu/" target="_blank" rel="noopener">BYU</a>.</p>
+      </section>
+    </div>
+  </main>
+  <footer class="site-footer"><span>Ryan White · IS 201 WebDev</span><a href="#top">Back to top ↑</a></footer>
+</body>
+</html>
